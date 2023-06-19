@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <cstring>
+#include "kelimeOyunuFonksiyonları.h"
+#include "kelime.h"
+using namespace std;
+
+
+
+int main() {
+	string istek;
+	cout << "Kelime Oyununa Hosgeldiniz." << endl;
+	cout << "Kelime ekleme islemleri yapabilir ya da oyuna zaten ekli olan kelimelerle baslayabilirsiniz." << endl;
+
+	baslangic:
+	cout << "Oyuna baslamak icin [basla] yazin.\nSoru eklemek icin [ekle] yazin." << endl;
+	cin >> istek;
+	cin.ignore();
+
+	if (istek == "basla" || istek == "Basla") {
+		vector<Kelime> oyunSorulari;
+		oyunSorulari = randomSoruHazirlayanFonksiyon();
+		oyunBaslatici(oyunSorulari);
+	
+	}
+	else if (istek == "ekle" || istek == "Ekle") {
+		soruEkleyenFonksiyon();
+	}
+	else {
+		goto baslangic;
+	}
+
+
+
+
+
+
+	
+}

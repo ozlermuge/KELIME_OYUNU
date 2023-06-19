@@ -1,0 +1,36 @@
+4;ucak;Kanatlarinin altindaki havanin yaptigi basinc yardimiyla yukselip ilerleyebilen motorlu hava tasiti
+4;kefe;Terazi gozlerinden her biri
+4;para;Uzerinde degeri yazili kagit veya metalden odeme araci
+4;halk;Bir ulke icerisinde yasayan degisik soylardan insan topluluklarinin her biri
+5;rakam;Sayilari gostermek icin kullanilan isaretlerden her biri
+5;sekil;Bir konuyu aciklamaya yarayan resim veya cizim
+5;kalin;Cisimlerde uzunluk ve genislik disinda ucuncu boyutu cok olan
+5;kibir;Kendini begenme
+5;sabir;Olacak veya gelecek bir seyi telas gostermeden bekleme
+6;olanak;Yararlanilan uygun sart veya durum
+6;adalet;Yasalarla sahip olunan haklarin herkes tarafindan kullanilmasinin saglanmasi, ture
+6;zengin;Parasi, mali cok olan
+6;caymak;Sozunden, kararindan donmek, vazgecmek
+6;tirmik;Tirnak beresi
+7;sehadet;Yuksek bir ulku ugrunda olme, sehit olma
+7;jupiter;Gezegenlerin en buyugu ve Gunese yakinlik bakimindan besincisi
+7;iyicene;Tam olarak, adamakilli
+7;cigilti;Ciglikla karisik sesin adi
+7;ogrenci;Ogrenim gormek amaciyla ders alan kimse
+8;sampiyon;Ulusal ve uluslararasi bir yarismada ilk dereceyi alan, birinci olan kimse veya takim
+8;ziyankar;Surekli zarar veren veya zarar vermeyi huy edinmis olan
+8;muhendis;Teknik, matematiksel ve sosyal veriler isiginda insanlarin kullanimina yonelik yeni sistemler uretme ve gelistirmeden sorumlu kimse
+8;tarafsiz;Yansiz
+8;ciddiyet;Agirbaslilik
+9;kabiliyet;Yetenek
+9;tarantula;Eklem bacaklilarin, orumcegimsiler sinifindan, daha cok Guney Avrupa'da yasayan, killarla kapli, yaklasik 2,5 santimetre uzunlukta, sekiz bacakli, iki kollu, etcil bir tur orumcek
+9;pismanlik;Pisman olma durumu, nedamet
+9;eczacilik;Ilacin ve kozmetik urunlerin uretimi, cozumlenmesi, etkinlik ve guvenirligi ile ilgili calismalari yuruten, bu urunlerin kullanicilara iletilmesini saglayan, ilac ve saglikla ilgili konularda danismanlik hizmeti veren saglik meslegi
+9;orneklemek;Ornek vermek
+10;tecrubesiz;Tecrubesi olmayan
+10;reklamcilik;Reklamcinin isi
+10;alelacayip;Cok acayip, bambaska
+10;sponsorluk;Destekleyicilik
+10;uyusturucu;Uyusturma ozelligi olan, uyusturan (madde), narkotik
+6;aramak;Bir kisiye telefonla cagrida bulunmak
+8;kazanmak;Galibiyete ulasmak

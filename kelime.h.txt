@@ -1,0 +1,43 @@
+#pragma once
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+
+class Kelime
+{
+public:
+	Kelime() {
+		kelime = " ";
+		soru = " ";
+		setKelimeUzunlugu();
+		setKelimeHarfleri();
+	}
+	Kelime(string kelime, string soru) {
+		this->kelime = kelime;
+		this->soru = soru;
+		setKelimeUzunlugu();
+		setKelimeHarfleri();
+
+	}
+	void setKelimeUzunlugu();
+	void setKelimeHarfleri();
+
+	string getKelime();
+	string getSoru();
+
+	int getKelimeUzunlugu();
+	vector <char> getKelimeHarfleri();
+
+	void printSoru();
+	
+
+
+private:
+	string kelime;
+	string soru;
+	int kelimeUzunlugu;
+	vector <char> kelimeHarfleri;
+};
+

@@ -1,0 +1,220 @@
+#include "kelimeOyunuFonksiyonları.h"
+
+void soruEkleyenFonksiyon(void) {
+
+	string kelimeBoyutu;
+	string kelime;
+	string soru;
+	string txtSatiri;
+
+	//kelimeyi istiyoruz
+	cout << "Ekleyeceginiz kelime nedir?" << endl;
+	cin >> kelime;
+
+	//girilen kelime boyutunu bir stringe aktariyoruz ileride dosyaya yazabilmek icin
+	kelimeBoyutu = to_string(kelime.length());
+
+	//girilen soruyu getline() ile aliyoruz cunku bosluklarda hatali veri uretiyor cin>> komutu
+	cout << "Bu kelime icin soracaginiz soru nedir?" << endl;
+	cin.ignore();
+	getline(cin, soru);
+
+	txtSatiri = kelimeBoyutu + ";" + kelime + ";" + soru;
+
+	//dogru alindi mi kontrolu
+	//cout << txtSatiri << endl;
+	
+
+	//dosyayi append (ios::app) komutuyla acip var olanlari koruyup ekliyoruz
+	ofstream outputFile("Kelime_Oyunu.txt", ios::app);
+
+	if (outputFile.is_open()) {
+
+		outputFile << txtSatiri << endl;
+
+	}
+
+	outputFile.close();
+
+}
+
+vector<Kelime> randomSoruHazirlayanFonksiyon(void) {
+
+	ifstream dosya("Kelime_Oyunu.txt");
+
+
+
+	vector<Kelime> butunKelimeler;
+	vector<Kelime> kelimeOyunuSorulari;
+	
+
+	string satir;
+	string token;
+	vector <string> tokenler;
+
+	
+	while (getline(dosya, satir)) {
+
+		stringstream ss(satir);
+
+		while (getline(ss, token, ';'))
+		{
+			tokenler.push_back(token);
+		}
+	
+		Kelime xKelime(tokenler[1], tokenler[2]);
+		butunKelimeler.push_back(xKelime);
+		
+
+		if (tokenler.size() == 3) {
+			tokenler.pop_back();
+			tokenler.pop_back();
+			tokenler.pop_back();
+		}
+
+	}
+	dosya.close();
+
+
+	random_device rd;
+	mt19937 g(rd());
+	shuffle(butunKelimeler.begin(), butunKelimeler.end(), g);
+	//shuffle butunKelimeleri karistiriyor
+
+	int kelimeUzunlukSayaci{ 4 };
+
+	for (kelimeUzunlukSayaci = 4; kelimeUzunlukSayaci <= 10; kelimeUzunlukSayaci++){
+
+		int i{ 0 };
+
+		for (int soruSayaci = 0; soruSayaci < butunKelimeler.size(); soruSayaci++) {
+
+			
+
+			if ((butunKelimeler[soruSayaci].getKelimeUzunlugu()) == kelimeUzunlukSayaci) {
+
+				kelimeOyunuSorulari.push_back(butunKelimeler[soruSayaci]);
+				i++;
+			}
+
+			if (i == 2) {
+				break;
+			}
+		}
+	
+		if (i == 2 && kelimeUzunlukSayaci == 10) {
+			break;
+		}
+	}
+	
+
+	return kelimeOyunuSorulari;
+}
+
+bool isNumber(const std::string& str) {
+	for (char c : str) {
+		if (!std::isdigit(c)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+int soruTahmin(Kelime soru) {
+
+	int puan = soru.getKelimeUzunlugu()*100;
+	string tahmin;
+		cout << "Cevabi tahmin etmek icin kelime girin.\nHarf istemek icin herhangi bir rakam girin." << endl;
+		cout << endl;
+		soru.printSoru();
+
+	while (true) {
+
+		getline(cin, tahmin);
+
+		if (isNumber(tahmin)) {
+			puan -= 100;
+			cout << "Yardim aldiginiz icin 100 puan kisildi.." << endl;
+
+			random_device rd;
+			mt19937 gen(rd());
+			uniform_int_distribution<> dis(0, soru.getKelimeUzunlugu()-1);
+			int rastgeleSayi = dis(gen);
+			
+			for (int sayac = 0; sayac < soru.getKelimeUzunlugu(); sayac++) {
+				if (sayac == rastgeleSayi) {
+					cout << (soru.getKelimeHarfleri())[sayac] << " ";
+				}
+				else {
+					cout << "_ ";
+				}
+			}
+			cout << endl;
+		}
+		else {
+			if (tahmin == soru.getKelime()) {
+				cout << "DOGRU BILDINIZ" << endl;
+				break;
+			}
+			else {
+				cout << "Yanlis. Tekrar giriniz." << endl;
+			}
+		}
+	}
+
+
+	if (puan <= 0) {
+		puan = 0;
+	}
+	cout << "Bu sorudan aldiginiz puan == " << puan << endl;
+	return puan;
+}
+
+
+void oyunBaslatici(vector<Kelime> sorular) {
+
+	//thread t(sureSayaci);
+	int toplamPuan = { 0 };
+	int gelenPuan = { 0 };
+	double toplamSaniye{ 0.0 };
+	int sure240 = 240;
+
+	for (int i = 0; i < 2; i++) {
+
+		auto start = chrono::high_resolution_clock::now();
+		gelenPuan = soruTahmin(sorular[i]);
+		auto end = chrono::high_resolution_clock::now();
+		
+
+
+		std::chrono::duration<double> elapsed = end - start;
+		int saniye = elapsed.count();
+
+		if (saniye > 20) {
+			cout << "Size verilen tahmin etme suresini astiniz..." << endl;
+			gelenPuan = -gelenPuan;
+		}
+
+		toplamPuan += gelenPuan;
+
+		sure240 -= saniye;
+		cout << "Kalan Sureniz " << sure240 << endl;
+		
+		if (sure240 <= 0) {
+			break;
+		}
+
+		toplamSaniye += saniye;
+	}
+
+	if (sure240 <= 0) {
+		cout << "Sureniz bitti..." << endl;
+		cout << "\n" << toplamPuan << " TOPLAM PUANINIZ " << endl;
+
+	}
+	else {
+		cout << "\n" << toplamPuan << " TOPLAM PUANINIZ " << endl;
+		cout << "GECEN TOPLAM SURENIZ " << toplamSaniye << endl;
+	}
+
+}
